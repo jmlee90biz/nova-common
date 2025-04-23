@@ -1,13 +1,14 @@
-package com.sktelecom.nova.modular.monolith.common.notification.internal;
+package com.sktelecom.nova.common.notification.internal;
 
-import com.sktelecom.nova.modular.monolith.common.notification.api.NotificationDto;
-import com.sktelecom.nova.modular.monolith.common.notification.api.NotificationRequest;
-import com.sktelecom.nova.modular.monolith.common.notification.api.NotificationService;
+import com.sktelecom.nova.common.notification.api.NotificationDto;
+import com.sktelecom.nova.common.notification.api.NotificationRequest;
+import com.sktelecom.nova.common.notification.api.NotificationService;
 
-import com.sktelecom.nova.modular.monolith.shared.kernel.EventPublisher;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -17,10 +18,11 @@ import java.util.UUID;
 @RequiredArgsConstructor
 class NotificationServiceImpl implements NotificationService {
     private final NotificationRepository notificationRepository;
-    private final EventPublisher eventPublisher;
+    private final ApplicationEventPublisher eventPublisher;
 
     @Override
-    @Transactional
+    @Async
+    @Transactional(propagation=Propagation.REQUIRES_NEW)
     public NotificationDto sendNotification(NotificationRequest notificationRequest) {
         Notification createdNotification = notificationRepository.save(
                 Notification.createNotification(
@@ -37,7 +39,11 @@ class NotificationServiceImpl implements NotificationService {
             throw new RuntimeException(e);
         }
 
-        eventPublisher.publish(createdNotification.createNotificationSentEvent());
+        eventPublisher.publishEvent(createdNotification.createNotificationSentEvent());
+
+        if(true) {
+            throw new RuntimeException("Exception");
+        }
 
         return NotificationMapper.toNotificationDto(createdNotification);
     }

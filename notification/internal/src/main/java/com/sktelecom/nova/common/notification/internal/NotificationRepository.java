@@ -1,4 +1,4 @@
-package com.sktelecom.nova.modular.monolith.common.notification.internal;
+package com.sktelecom.nova.common.notification.internal;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

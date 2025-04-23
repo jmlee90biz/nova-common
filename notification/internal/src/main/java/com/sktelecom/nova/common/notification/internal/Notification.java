@@ -1,6 +1,6 @@
-package com.sktelecom.nova.modular.monolith.common.notification.internal;
+package com.sktelecom.nova.common.notification.internal;
 
-import com.sktelecom.nova.modular.monolith.common.notification.event.NotificationSentEvent;
+import com.sktelecom.nova.common.notification.event.NotificationSentEvent;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;

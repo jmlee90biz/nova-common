@@ -1,7 +1,11 @@
 @ApplicationModule(
         displayName = "common-notification",
-        allowedDependencies = {}
+        allowedDependencies = {
+            "customer.profile.event",
+                "product.catalog.event",
+                "billing.payment.event"
+        }
 )
-package com.sktelecom.nova.modular.monolith.common.notification;
+package com.sktelecom.nova.common.notification.internal;
 
 import org.springframework.modulith.ApplicationModule;

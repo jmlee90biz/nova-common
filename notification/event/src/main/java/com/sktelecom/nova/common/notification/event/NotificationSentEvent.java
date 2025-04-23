@@ -1,4 +1,4 @@
-package com.sktelecom.nova.modular.monolith.common.notification.event;
+package com.sktelecom.nova.common.notification.event;
 
 import java.util.UUID;
 

@@ -1,6 +1,6 @@
-package com.sktelecom.nova.modular.monolith.common.notification.internal;
+package com.sktelecom.nova.common.notification.internal;
 
-import com.sktelecom.nova.modular.monolith.common.notification.api.NotificationDto;
+import com.sktelecom.nova.common.notification.api.NotificationDto;
 
 class NotificationMapper {
     static NotificationDto toNotificationDto(Notification notification) {
